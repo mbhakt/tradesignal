@@ -1,0 +1,96 @@
+type http_request_result = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type http_header = 
+ record {
+   name: text;
+   value: text;
+ };
+type WatchlistItem = 
+ record {
+   change: float64;
+   changePercent: float64;
+   currency: opt text;
+   exchange: opt text;
+   lastUpdated: int;
+   price: float64;
+   symbol: text;
+ };
+type TransformationOutput = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type TransformationInput = 
+ record {
+   context: blob;
+   response: http_request_result;
+ };
+type SignalResult = 
+ record {
+   computedAt: int;
+   confidence: Confidence;
+   indicators: IndicatorSummary;
+   signal: Signal;
+   symbol: text;
+ };
+type Signal = 
+ variant {
+   Buy;
+   Hold;
+   Sell;
+ };
+type Position = 
+ record {
+   currentPrice: float64;
+   entryDate: int;
+   entryPrice: float64;
+   exchange: opt text;
+   id: text;
+   pnl: float64;
+   pnlPercent: float64;
+   quantity: float64;
+   symbol: text;
+ };
+type PortfolioSummary = 
+ record {
+   totalCost: float64;
+   totalPnl: float64;
+   totalPnlPercent: float64;
+   totalValue: float64;
+ };
+type IndicatorSummary = 
+ record {
+   bollingerLower: float64;
+   bollingerMiddle: float64;
+   bollingerUpper: float64;
+   emaLong: float64;
+   emaShort: float64;
+   macdHistogram: float64;
+   macdLine: float64;
+   macdSignal: float64;
+   rsi: float64;
+ };
+type Confidence = 
+ variant {
+   High;
+   Low;
+   Medium;
+ };
+service : {
+  addPosition: (symbol: text, entryPrice: float64, quantity: float64,
+   entryDate: int, exchange: opt text) -> ();
+  addToWatchlist: (symbol: text, exchange: opt text) -> ();
+  getPortfolio: () -> (vec Position);
+  getPortfolioSummary: () -> (PortfolioSummary);
+  getStockSignal: (symbol: text) -> (SignalResult);
+  getWatchlist: () -> (vec WatchlistItem);
+  refreshPrice: (symbol: text) -> (WatchlistItem);
+  removeFromWatchlist: (symbol: text) -> ();
+  removePosition: (id: text) -> ();
+  transform: (input: TransformationInput) -> (TransformationOutput) query;
+}

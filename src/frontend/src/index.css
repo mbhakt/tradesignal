@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "General Sans";
+    --font-body: "General Sans";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.25rem;
+
+    /* Dark-only palette — fintech Bloomberg/TradingView style */
+    --background: 0.11 0.005 260;
+    --foreground: 0.92 0.006 260;
+    --card: 0.155 0.008 260;
+    --card-foreground: 0.92 0.006 260;
+    --popover: 0.18 0.009 260;
+    --popover-foreground: 0.95 0 0;
+
+    /* BUY — emerald green */
+    --primary: 0.66 0.19 148;
+    --primary-foreground: 0.1 0 0;
+
+    /* HOLD — amber */
+    --accent: 0.72 0.17 78;
+    --accent-foreground: 0.1 0 0;
+
+    /* SELL — red */
+    --destructive: 0.6 0.22 24;
+    --destructive-foreground: 0.95 0 0;
+
+    --secondary: 0.19 0.008 260;
+    --secondary-foreground: 0.82 0.005 260;
+    --muted: 0.2 0.007 260;
+    --muted-foreground: 0.55 0.006 260;
+
+    --border: 0.22 0.009 260;
+    --input: 0.19 0.009 260;
+    --ring: 0.66 0.19 148;
+
+    --chart-1: 0.66 0.19 148;
+    --chart-2: 0.72 0.17 78;
+    --chart-3: 0.6 0.22 24;
+    --chart-4: 0.65 0.16 250;
+    --chart-5: 0.7 0.12 200;
+
+    --sidebar: 0.13 0.007 260;
+    --sidebar-foreground: 0.88 0.006 260;
+    --sidebar-primary: 0.66 0.19 148;
+    --sidebar-primary-foreground: 0.1 0 0;
+    --sidebar-accent: 0.19 0.009 260;
+    --sidebar-accent-foreground: 0.82 0.005 260;
+    --sidebar-border: 0.21 0.009 260;
+    --sidebar-ring: 0.66 0.19 148;
+  }
+
+  .dark {
+    --background: 0.11 0.005 260;
+    --foreground: 0.92 0.006 260;
+    --card: 0.155 0.008 260;
+    --card-foreground: 0.92 0.006 260;
+    --popover: 0.18 0.009 260;
+    --popover-foreground: 0.95 0 0;
+
+    --primary: 0.66 0.19 148;
+    --primary-foreground: 0.1 0 0;
+
+    --accent: 0.72 0.17 78;
+    --accent-foreground: 0.1 0 0;
+
+    --destructive: 0.6 0.22 24;
+    --destructive-foreground: 0.95 0 0;
+
+    --secondary: 0.19 0.008 260;
+    --secondary-foreground: 0.82 0.005 260;
+    --muted: 0.2 0.007 260;
+    --muted-foreground: 0.55 0.006 260;
+
+    --border: 0.22 0.009 260;
+    --input: 0.19 0.009 260;
+    --ring: 0.66 0.19 148;
+
+    --chart-1: 0.66 0.19 148;
+    --chart-2: 0.72 0.17 78;
+    --chart-3: 0.6 0.22 24;
+    --chart-4: 0.65 0.16 250;
+    --chart-5: 0.7 0.12 200;
+
+    --sidebar: 0.13 0.007 260;
+    --sidebar-foreground: 0.88 0.006 260;
+    --sidebar-primary: 0.66 0.19 148;
+    --sidebar-primary-foreground: 0.1 0 0;
+    --sidebar-accent: 0.19 0.009 260;
+    --sidebar-accent-foreground: 0.82 0.005 260;
+    --sidebar-border: 0.21 0.009 260;
+    --sidebar-ring: 0.66 0.19 148;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "tnum" 1, "kern" 1;
+  }
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer utilities {
+  /* ── Transitions ─────────────────────────────────────────── */
+  .transition-smooth {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .transition-colors-fast {
+    transition: color 0.15s ease, background-color 0.15s ease, border-color
+      0.15s ease;
+  }
+
+  /* ── Signal color utilities ──────────────────────────────── */
+  .signal-buy {
+    @apply bg-primary/10 text-primary border border-primary/30;
+  }
+  .signal-hold {
+    @apply bg-accent/10 text-accent border border-accent/30;
+  }
+  .signal-sell {
+    @apply bg-destructive/10 text-destructive border border-destructive/30;
+  }
+
+  /* ── Price change colors ─────────────────────────────────── */
+  .price-up {
+    @apply text-primary;
+  }
+  .price-down {
+    @apply text-destructive;
+  }
+  .price-neutral {
+    @apply text-muted-foreground;
+  }
+
+  /* ── Data-dense label helpers ────────────────────────────── */
+  .data-label {
+    @apply text-muted-foreground text-xs uppercase tracking-widest font-medium;
+  }
+  .data-value {
+    @apply font-mono tabular-nums text-foreground;
+  }
+  .price-display {
+    @apply font-mono tabular-nums font-semibold tracking-tight;
+  }
+
+  /* ── Card / surface overrides ────────────────────────────── */
+  .trading-card {
+    @apply bg-card border border-border rounded-sm;
+  }
+  .trading-card-hover {
+    @apply hover:bg-secondary transition-colors-fast;
+  }
+
+  /* ── Sidebar active state ────────────────────────────────── */
+  .sidebar-nav-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-sm text-sm font-medium text-muted-foreground
+           hover:text-foreground hover:bg-secondary transition-colors-fast cursor-pointer select-none;
+  }
+  .sidebar-nav-item.active {
+    @apply text-foreground bg-secondary border-l-2 border-primary pl-[10px];
+  }
+
+  /* ── Scrollbar ───────────────────────────────────────────── */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(var(--border)) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 2px;
+  }
+
+  /* ── Grid helpers ────────────────────────────────────────── */
+  .grid-trading {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.75rem;
+  }
+
+  /* ── Subtle glow for active signals ──────────────────────── */
+  .glow-buy {
+    box-shadow: 0 0 12px -4px oklch(var(--primary) / 0.35);
+  }
+  .glow-sell {
+    box-shadow: 0 0 12px -4px oklch(var(--destructive) / 0.35);
+  }
+}

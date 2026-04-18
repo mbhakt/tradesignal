@@ -1,0 +1,21 @@
+{
+  "overview": "A stock market trading signals app that evaluates live market prices and delivers clear BUY, HOLD, or SELL recommendations. Built on technical indicators like RSI, MACD, EMA, and Bollinger Bands, it helps traders make data-driven decisions — no guesswork.",
+  "features": [
+    "Live stock price lookup by ticker symbol",
+    "BUY/HOLD/SELL signals with confidence levels",
+    "RSI, MACD, EMA, Bollinger Bands analysis",
+    "Persistent watchlist across sessions",
+    "Portfolio tracking with P&L calculations",
+    "Dark/light mode with responsive layout"
+  ],
+  "category": "finance",
+  "tags": [
+    "stock-market",
+    "trading",
+    "signals",
+    "portfolio",
+    "technical-analysis",
+    "finance"
+  ],
+  "last_updated": "2026-04-18T04:33:29.248Z"
+}

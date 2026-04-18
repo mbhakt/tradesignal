@@ -1,0 +1,82 @@
+// Version: 3.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type OldPosition__111860368 =
+  {
+    currentPrice : Float;
+    entryDate : Int;
+    entryPrice : Float;
+    id : Text;
+    pnl : Float;
+    pnlPercent : Float;
+    quantity : Float;
+    symbol : Text
+  };
+type OldWatchlistItem__233952307 =
+  {
+    change : Float;
+    changePercent : Float;
+    lastUpdated : Int;
+    price : Float;
+    symbol : Text
+  };
+type Position__349586506 =
+  {
+    currentPrice : Float;
+    entryDate : Int;
+    entryPrice : Float;
+    exchange : ?Text;
+    id : Text;
+    pnl : Float;
+    pnlPercent : Float;
+    quantity : Float;
+    symbol : Text
+  };
+type WatchlistItem__722202946 =
+  {
+    change : Float;
+    changePercent : Float;
+    currency : ?Text;
+    exchange : ?Text;
+    lastUpdated : Int;
+    price : Float;
+    symbol : Text
+  };
+actor ({
+  in positions : List__415060402<OldPosition__111860368>;
+  in priceCache : Map__605269027<Text, Float>;
+  in watchlist : List__415060402<OldWatchlistItem__233952307>
+}, {
+  stable positions :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Position__349586506]];
+      var elementIndex : Nat__490723111
+    };
+  stable priceCache :
+    {var root : Node__46230540<Text, Float>; var size : Nat__490723111};
+  stable watchlist :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?WatchlistItem__722202946]];
+      var elementIndex : Nat__490723111
+    }
+}) ;
